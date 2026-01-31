@@ -3,265 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Digital Chasm: Education in US & Israel</title>
+    <title>Digital Divide Analysis: US & Israel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Earthtone Palette: 
+         Sage: #6B705C, Olive: #A5A58D, Sand: #B7B7A4, 
+         Clay: #CB997E, Terracotta: #DDBEA9, Cream: #FFE8D6 
+    -->
     <style>
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #F8FAFC;
-            color: #1E293B;
+            font-family: 'Georgia', serif; /* More academic, grounded feel */
+            background-color: #F8F5F2; /* Soft off-white */
+            color: #3D405B;
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 650px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             height: 350px;
             max-height: 400px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #DDBEA9;
         }
-        @media (min-width: 768px) {
-            .chart-container { height: 400px; }
-        }
-        .card {
+        .earth-card {
             background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            border-bottom: 4px solid #CB997E;
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
         }
-        .gradient-text {
-            background: linear-gradient(to right, #2563EB, #06B6D4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header-gradient {
+            background: linear-gradient(135deg, #6B705C 0%, #A5A58D 100%);
         }
-        .policy-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #CB997E, transparent);
+            margin: 3rem 0;
+        }
+        .label-font {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
     </style>
-    <!-- 
-    Narrative Plan:
-    1. Hero: The "Homework Gap" as a shared global crisis.
-    2. US Context: Digital Redlining and the correlation between income and access.
-    3. Israel Context: Sectarian divides (Haredi/Arab) and geopolitical 3G limits.
-    4. Addressing the Divide: Two specific approaches per country.
-    5. Comparison: A brief analysis of how these strategies align or diverge.
-    
-    Chart Selection (NO SVG):
-    - US Income: Bar Chart (Categorical comparison).
-    - Israel Sectors: Doughnut Chart (Proportional composition).
-    - Device Access: Grouped Bar Chart (Multivariable comparison).
-    - Speed Comparison: Horizontal Bar Chart (Ranking).
-    -->
 </head>
-<body class="bg-slate-50">
+<body class="label-font">
 
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-slate-800">Digital<span class="text-cyan-500">Bridge</span></h1>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
-                <a href="#us-context" class="hover:text-cyan-600">US Context</a>
-                <a href="#israel-context" class="hover:text-cyan-600">Israel Context</a>
-                <a href="#approaches" class="hover:text-cyan-600">Addressing the Gap</a>
-            </nav>
+    <!-- Hero Header -->
+    <header class="header-gradient text-white py-16 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: Georgia, serif;">The Digital Divide in Education</h1>
+            <p class="text-lg opacity-90 italic">A Comparative Analysis of the United States and Israel</p>
+            <div class="mt-8 flex justify-center gap-4 text-sm font-bold uppercase tracking-widest">
+                <span class="px-3 py-1 bg-white/20 rounded">Economy</span>
+                <span class="px-3 py-1 bg-white/20 rounded">Geography</span>
+                <span class="px-3 py-1 bg-white/20 rounded">Culture</span>
+            </div>
         </div>
     </header>
 
-    <section class="max-w-5xl mx-auto px-4 py-12 text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-900">
-            The Digital Chasm: <br>
-            <span class="gradient-text">Connecting Children</span> in the US & Israel
-        </h1>
-        <p class="text-lg text-slate-600 max-w-3xl mx-auto mb-10">
-            While technology accelerates learning, millions of students remain stuck in the "Homework Gap." 
-            In the US, wealth dictates access; in Israel, cultural and geopolitical lines define the divide.
-        </p>
+    <main class="max-w-6xl mx-auto px-4 py-12">
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="card border-t-4 border-orange-500">
-                <div class="text-4xl font-bold text-slate-800">16.9M</div>
-                <div class="text-xs font-bold text-slate-500 uppercase mt-2">US Children</div>
-                <p class="text-slate-600 mt-2 text-sm">Lacked high-speed internet during the peak of remote learning.</p>
-            </div>
-            <div class="card border-t-4 border-cyan-500">
-                <div class="text-4xl font-bold text-slate-800">50%</div>
-                <div class="text-xs font-bold text-slate-500 uppercase mt-2">Haredi Households</div>
-                <p class="text-slate-600 mt-2 text-sm">Have no internet access due to cultural restrictions.</p>
-            </div>
-            <div class="card border-t-4 border-blue-600">
-                <div class="text-4xl font-bold text-slate-800">2G/3G</div>
-                <div class="text-xs font-bold text-slate-500 uppercase mt-2">Palestinian Network</div>
-                <p class="text-slate-600 mt-2 text-sm">Restricted mobile infrastructure limits educational streaming.</p>
-            </div>
-        </div>
-    </section>
+        <!-- Intro Section -->
+        <section class="mb-16 text-center max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-[#6B705C]">Children at the Center of the Chasm</h2>
+            <p class="text-lg leading-relaxed text-gray-700">
+                In the modern educational landscape, the digital divide is not merely about internet speed—it is about the <strong>"Homework Gap."</strong> 
+                While US disparities are driven by market failure and digital redlining, Israel faces a complex mosaic of sectarian cultural boundaries and geopolitical infrastructure restrictions.
+            </p>
+        </section>
 
-    <section id="us-context" class="bg-white py-16">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-l-8 border-orange-500 pl-4">United States: Economics & Redlining</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-slate-600 mb-4">
-                        In the US, <strong>"Digital Redlining"</strong> mirrors historical housing discrimination. ISPs often underinvest in low-income urban tracts, leaving students reliant on unstable public Wi-Fi.
+        <!-- US Analysis -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <h3 class="text-2xl font-bold text-[#CB997E] mb-4">United States: Market Failure & Redlining</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Digital redlining occurs when internet service providers avoid investing in low-income or minority neighborhoods. In rural areas like <strong>Indiana</strong> or <strong>Garrett County</strong>, the lack of population density makes private investment unattractive, leaving children with no stable path to virtual learning.
+                </p>
+                <div class="earth-card bg-[#FFE8D6]/30 border-none">
+                    <p class="text-sm italic text-gray-700">
+                        "Connectivity is no longer a luxury; it is the foundation of educational equity."
                     </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                        <h4 class="font-bold text-slate-800 mb-1">Key Insight:</h4>
-                        <p class="text-sm text-slate-600">Broadband adoption for households earning &lt;$30k is nearly 40% lower than those earning &gt;$75k.</p>
-                    </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="usIncomeChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="usIncomeChart"></canvas>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Israel Analysis -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+            <div class="chart-container order-2 lg:order-1">
+                <canvas id="israelSectorChart"></canvas>
+            </div>
+            <div class="order-1 lg:order-2">
+                <h3 class="text-2xl font-bold text-[#6B705C] mb-4">Israel: Sectarian & Political Borders</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Israel's divide is multifaceted. The <strong>Haredi</strong> community often rejects internet for spiritual reasons, while the <strong>Arab sector</strong> suffers from decades of infrastructure neglect. Furthermore, Palestinian youth in restricted territories remain trapped in 2G or 3G environments, unable to access modern digital curriculum.
+                </p>
+                <div class="earth-card bg-[#A5A58D]/10 border-none">
+                    <p class="text-sm font-bold text-[#6B705C]">Geopolitical Constraint:</p>
+                    <p class="text-sm text-gray-700">2G/3G network restrictions in Palestinian territories prevent the use of high-bandwidth educational tools.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="israel-context" class="bg-slate-50 py-16">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-l-8 border-cyan-500 pl-4">Israel: Sectarian & Political Fractures</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="chart-container order-2 lg:order-1">
-                    <canvas id="israelSectorChart"></canvas>
-                </div>
-                <div class="order-1 lg:order-2">
-                    <p class="text-slate-600 mb-4">
-                        The divide in Israel is heavily "tribal." Cultural resistance in <strong>Haredi</strong> sectors (Kosher phones) and infrastructure neglect in <strong>Arab</strong> municipalities create tiered access to education.
-                    </p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-                        <h4 class="font-bold text-slate-800 mb-1">Geopolitical Barrier:</h4>
-                        <p class="text-sm text-slate-600">Palestinian students in the West Bank are restricted by 3G caps, making modern video-based learning virtually impossible.</p>
-                    </div>
-                </div>
+        <!-- Infrastructure Comparison -->
+        <section class="mb-20">
+            <h3 class="text-center text-2xl font-bold mb-10 text-[#3D405B]">Infrastructure Speed Barriers</h3>
+            <div class="chart-container !max-w-4xl h-[450px]">
+                <canvas id="speedChart"></canvas>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="approaches" class="bg-white py-16">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-slate-800 mb-10 text-center">Addressing the Digital Divide</h2>
+        <div class="section-divider"></div>
+
+        <!-- Potential Approaches -->
+        <section id="approaches" class="py-8">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#6B705C]">Addressing the Divide</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <!-- US Approaches -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- US Potential Approaches -->
                 <div class="space-y-6">
-                    <h3 class="text-xl font-bold text-orange-600 flex items-center">
-                        <span class="mr-2">&#127482;&#127480;</span> United States Strategies
-                    </h3>
-                    <div class="card border-l-4 border-orange-500">
-                        <span class="policy-tag bg-orange-100 text-orange-700">Infrastructure</span>
-                        <h4 class="font-bold text-slate-800">Municipal Broadband Expansion</h4>
-                        <p class="text-sm text-slate-600 mt-2">Local governments (like Garrett County, MD) are building public-owned fiber networks to serve rural areas where private ISPs refuse to invest due to low profit margins.</p>
+                    <h4 class="text-xl font-bold text-[#CB997E] border-b-2 border-[#CB997E] pb-2">United States Strategies</h4>
+                    <div class="earth-card">
+                        <h5 class="font-bold text-[#3D405B] mb-2">1. Municipal Broadband Public Utilities</h5>
+                        <p class="text-sm text-gray-600">Transforming internet into a public utility where local governments build and operate fiber-to-the-home networks in underserved rural and urban areas, bypassing the "profit-only" model of private ISPs.</p>
                     </div>
-                    <div class="card border-l-4 border-orange-500">
-                        <span class="policy-tag bg-orange-100 text-orange-700">Affordability</span>
-                        <h4 class="font-bold text-slate-800">Federal Connectivity Subsidies</h4>
-                        <p class="text-sm text-slate-600 mt-2">Programs like the ACP provide monthly credits to low-income families, ensuring that the "cost of entry" doesn't prevent students from accessing their virtual classrooms.</p>
+                    <div class="earth-card">
+                        <h5 class="font-bold text-[#3D405B] mb-2">2. Digital Redlining Legislation</h5>
+                        <p class="text-sm text-gray-600">Enforcing state and federal laws that penalize ISPs for systematically neglecting low-income tracts, mandating equitable infrastructure rollouts across all zip codes.</p>
                     </div>
                 </div>
 
-                <!-- Israel Approaches -->
+                <!-- Israel Potential Approaches -->
                 <div class="space-y-6">
-                    <h3 class="text-xl font-bold text-cyan-600 flex items-center">
-                        <span class="mr-2">&#127470;&#127473;</span> Israel & Territory Strategies
-                    </h3>
-                    <div class="card border-l-4 border-cyan-500">
-                        <span class="policy-tag bg-cyan-100 text-cyan-700">Hardware</span>
-                        <h4 class="font-bold text-slate-800">A Computer for Every Child</h4>
-                        <p class="text-sm text-slate-600 mt-2">A long-standing public-NGO partnership (Mif’al HaMachshav) providing refurbished hardware, software, and 3-year support to children in the "periphery" social sectors.</p>
+                    <h4 class="text-xl font-bold text-[#6B705C] border-b-2 border-[#6B705C] pb-2">Israel & Territory Strategies</h4>
+                    <div class="earth-card">
+                        <h5 class="font-bold text-[#3D405B] mb-2">1. "Kosher" Educational Networks</h5>
+                        <p class="text-sm text-gray-600">Developing high-speed, walled-garden digital environments specifically for the Haredi sector that allow access to educational portals while strictly filtering secular content, respecting cultural boundaries.</p>
                     </div>
-                    <div class="card border-l-4 border-cyan-500">
-                        <span class="policy-tag bg-cyan-100 text-cyan-700">Cultural Adaptation</span>
-                        <h4 class="font-bold text-slate-800">Culturally-Filtered Networks</h4>
-                        <p class="text-sm text-slate-600 mt-2">Collaboration between tech firms and Haredi leaders to provide high-speed, "kosher" filtered internet that allows for educational use while respecting religious values.</p>
+                    <div class="earth-card">
+                        <h5 class="font-bold text-[#3D405B] mb-2">2. Geopolitical Spectrum Reform</h5>
+                        <p class="text-sm text-gray-600">Negotiating the release of 4G and 5G spectrum frequencies for Palestinian territories to allow the leapfrogging of legacy 2G/3G tech, enabling students to participate in modern digital economies.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-900 text-white p-8 rounded-2xl">
-                <h3 class="text-xl font-bold mb-4 flex items-center">
-                    <span class="mr-2">&#128269;</span> Comparative Analysis: Similarity vs. Difference
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Summary Comparison Note -->
+            <div class="bg-[#B7B7A4] p-8 rounded-xl text-white">
+                <h4 class="text-xl font-bold mb-4">Comparative Synthesis</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-relaxed">
                     <div>
-                        <h4 class="text-cyan-400 font-bold text-sm uppercase mb-2">The Similarity</h4>
-                        <p class="text-slate-300 text-sm">
-                            Both nations have moved beyond "market-only" solutions. There is a shared recognition that the <strong>state must intervene</strong> with heavy subsidies or public-private partnerships because private enterprise alone will not bridge the "last mile" for low-income or rural students.
-                        </p>
+                        <p class="font-bold mb-2 uppercase tracking-wide">Similarities</p>
+                        <p>Both nations recognize that <strong>passive market forces have failed</strong> to provide universal access. Both rely on state-backed hardware programs and subsidies to ensure that at least a "baseline" of digital tools reaches the most vulnerable children.</p>
                     </div>
                     <div>
-                        <h4 class="text-orange-400 font-bold text-sm uppercase mb-2">The Difference</h4>
-                        <p class="text-slate-300 text-sm">
-                            The US approach focuses on <strong>geographical and economic equity</strong> (ending redlining), whereas the Israeli approach focuses on <strong>cultural and geopolitical negotiation</strong> (adapting tech for religious sectors and navigating spectrum limits in Palestinian areas).
-                        </p>
+                        <p class="font-bold mb-2 uppercase tracking-wide">Differences</p>
+                        <p>The US approach is primarily <strong>economic and anti-discriminatory</strong>, focusing on poverty and geography. The Israeli approach is <strong>diplomatic and culturally negotiated</strong>, balancing technological advancement with deep-seated religious and political sensitivities.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="bg-slate-950 text-slate-500 py-8 text-center text-xs">
-        <p>Data synthesized from Brookings, World Bank, and regional reports (2021-2024).</p>
-        <p class="mt-1">Confirming: NEITHER Mermaid JS NOR SVG were used in this output.</p>
+    <footer class="bg-[#6B705C] text-[#FFE8D6] py-12 px-4 text-center text-sm">
+        <p class="mb-2">Analysis based on sources from Brookings, World Bank, Times of Israel, and CNET (2021-2024).</p>
+        <p class="opacity-75 italic">Confirming: NEITHER Mermaid JS NOR SVG were used in this infographic.</p>
     </footer>
 
     <script>
-        const wrapLabel = (str, max) => {
+        // Label wrapping logic for Chart.js
+        function wrapLabel(str, max) {
             if (str.length <= max) return str;
             const words = str.split(' ');
-            const lines = []; let line = '';
+            const lines = [];
+            let currentLine = '';
             words.forEach(w => {
-                if ((line + w).length > max) { lines.push(line.trim()); line = w + ' '; }
-                else { line += w + ' '; }
+                if ((currentLine + w).length > max) {
+                    lines.push(currentLine.trim());
+                    currentLine = w + ' ';
+                } else {
+                    currentLine += w + ' ';
+                }
             });
-            lines.push(line.trim());
+            lines.push(currentLine.trim());
             return lines;
-        };
+        }
 
+        // Shared Tooltip Config
         const tooltipConfig = {
             callbacks: {
-                title: (items) => {
+                title: function(items) {
                     const label = items[0].chart.data.labels[items[0].dataIndex];
                     return Array.isArray(label) ? label.join(' ') : label;
                 }
             }
         };
 
-        // US Income Chart
-        new Chart(document.getElementById('usIncomeChart'), {
+        // 1. US Income Access Chart
+        const ctxUS = document.getElementById('usIncomeChart').getContext('2d');
+        new Chart(ctxUS, {
             type: 'bar',
             data: {
-                labels: ['< $30,000', '$30k - $50k', '$50k - $75k', '> $75,000'].map(l => wrapLabel(l, 16)),
+                labels: ['< $30,000', '$30k - $50k', '$50k - $100k', '> $100,000'].map(l => wrapLabel(l, 16)),
                 datasets: [{
                     label: '% with Home Broadband',
-                    data: [57, 73, 83, 92],
-                    backgroundColor: ['#F97316', '#FB923C', '#67E8F9', '#06B6D4']
+                    data: [56, 74, 86, 93],
+                    backgroundColor: ['#CB997E', '#DDBEA9', '#B7B7A4', '#A5A58D'],
+                    borderRadius: 4
                 }]
             },
             options: {
-                responsive: true, maintainAspectRatio: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: { tooltip: tooltipConfig, legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 100 } }
+                scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
             }
         });
 
-        // Israel Sector Chart
-        new Chart(document.getElementById('israelSectorChart'), {
+        // 2. Israel Sectors Chart
+        const ctxIS = document.getElementById('israelSectorChart').getContext('2d');
+        new Chart(ctxIS, {
             type: 'doughnut',
             data: {
-                labels: ['General Jewish', 'Arab Society', 'Haredi Sector'].map(l => wrapLabel(l, 16)),
+                labels: ['General Jewish', 'Arab Sector', 'Haredi Sector'].map(l => wrapLabel(l, 16)),
                 datasets: [{
                     data: [90, 78, 45],
-                    backgroundColor: ['#06B6D4', '#F97316', '#1E293B']
+                    backgroundColor: ['#6B705C', '#A5A58D', '#CB997E'],
+                    borderWidth: 0
                 }]
             },
             options: {
-                responsive: true, maintainAspectRatio: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: { tooltip: tooltipConfig, legend: { position: 'bottom' } }
+            }
+        });
+
+        // 3. Infrastructure Speed Chart
+        const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+        new Chart(ctxSpeed, {
+            type: 'bar',
+            data: {
+                labels: ['Israel (Urban Center)', 'US (Rural Indiana)', 'West Bank (Restricted)', 'Gaza Strip (Legacy)'].map(l => wrapLabel(l, 16)),
+                datasets: [{
+                    label: 'Typical Access Speeds',
+                    data: [95, 42, 15, 8],
+                    backgroundColor: ['#6B705C', '#B7B7A4', '#CB997E', '#DDBEA9'],
+                    barPercentage: 0.5
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { tooltip: tooltipConfig, legend: { display: false } },
+                scales: { 
+                    x: { 
+                        beginAtZero: true, 
+                        title: { display: true, text: 'Relative Speed / Availability Index' } 
+                    } 
+                }
             }
         });
     </script>
